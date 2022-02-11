@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MultiPie</string>
+
+    <string-array name="units">
+        <item>Liter</item>
+        <item>Milliliter</item>
+        <item>Centiliter</item>
+        <item>Kilogramm</item>
+        <item>Gramm</item>
+        <item>Milligram</item>
+        <item>Pfund</item>
+        <item>Teelöffel</item>
+        <item>Esslöffel</item>
+        <item>Prise</item>
+        <item>Tasse</item>
+        <item>Packung</item>
+        <item>Stück</item>
+    </string-array>
+</resources>
