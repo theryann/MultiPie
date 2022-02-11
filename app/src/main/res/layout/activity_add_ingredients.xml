@@ -28,8 +28,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:scrollbarStyle="insideOverlay"
             android:scrollbars="vertical">
 
@@ -41,7 +41,7 @@
                 <TextView
                     android:id="@+id/tv_show_ingredients"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="#636C6A6A"
                     android:paddingLeft="20dp"
                     android:paddingTop="20dp"
