@@ -3,9 +3,7 @@ package de.terian.multipie;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -18,10 +16,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements Savior {
@@ -55,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements Savior {
 
         updateList();
 
-        tvScaleIngredients = findViewById(R.id.tvScaleIngredients);
+        tvScaleIngredients = findViewById(R.id.tv_add_ingredients);
 
         btnAddRecipe = findViewById(R.id.buttonAddRecipe);
         btnAddRecipe.setOnClickListener(new View.OnClickListener() {
@@ -109,9 +103,9 @@ public class MainActivity extends AppCompatActivity implements Savior {
         saveData(cookBook);
 
         for (Recipe recipe : cookBook){
-            if (recipe.getName().equals("")) {
-                return;
-            }
+//            if (recipe.getName().equals("")) {
+//                return;
+//            }
 
             btnCount += 1;
             Button btnNew = new Button(getApplicationContext());

@@ -76,8 +76,8 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                 cookBook = loadData();
 
                 setIngredientsTextView();
-//                en_ingredient_amount.setText("");
-//                et_ingredient_name.setText("");
+                en_ingredient_amount.setText("");
+                et_ingredient_name.setText("");
 
 
             }

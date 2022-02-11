@@ -32,7 +32,7 @@ public class Recipe {
     }
     public void removeIngredient(String name){
         for (Ingredient ingredient : ingredients) {
-            if (ingredient.getName() == name){
+            if (ingredient.getName().equals(name)){
                 this.ingredients.remove(ingredient);
                 break;
             }
