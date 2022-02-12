@@ -25,6 +25,21 @@ public interface Savior {
     WindowManager getWindowManager();
     Context getApplicationContext();
 
+    enum Colors {
+        STANDARD_RED("#FA4343"),
+        STANDARD_GREY("#6C6A6A"),
+        BG_BLACK("#303030");
+
+        private String colorText;
+        private Colors(String colorText) {
+            this.colorText = colorText;
+        }
+        public String getDisplayText() {
+            return colorText;
+        }
+
+    }
+
     default void saveData(ArrayList<Recipe> cookBook) {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -28,7 +33,8 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
     private String recipeName;
     private String currentSelectedUnit;
     private String ingredientTextShow;
-    TextView tv_show_ingredients;
+    private int btnCount;
+    TextView tv_add_ingredients_recipe_name;
     ImageView iv_add_ingredient;
     EditText et_ingredient_name;
     EditText en_ingredient_amount;
@@ -44,7 +50,7 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
         spn_choose_unit.setAdapter(adapter);
         spn_choose_unit.setOnItemSelectedListener(this);
 
-        tv_show_ingredients = findViewById(R.id.tv_show_ingredients);
+        tv_add_ingredients_recipe_name = findViewById(R.id.tv_add_ingredients_recipe_name);
         et_ingredient_name = findViewById(R.id.et_ingredient_name);
         en_ingredient_amount = findViewById(R.id.en_ingredient_amount);
 
@@ -75,7 +81,7 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                 saveData(cookBook);
                 cookBook = loadData();
 
-                setIngredientsTextView();
+                setIngredients();
                 en_ingredient_amount.setText("");
                 et_ingredient_name.setText("");
 
@@ -89,27 +95,73 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
         // load the recipe the ingredients are added to
         Intent intent = getIntent();
         recipeName = intent.getStringExtra(MainActivity.EXTRA_TEXT);
-        setIngredientsTextView();
-
+        tv_add_ingredients_recipe_name.setText(recipeName);
+        setIngredients();
     }
 
-    private void setIngredientsTextView() {
-        // format für 3.0 -> 3
+
+
+    private void setIngredients () {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.vl_add_ingredients);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(10, 10, 10, 20);
+        layout.removeAllViews();
+
         DecimalFormat decFormat = new DecimalFormat();
         decFormat.setDecimalSeparatorAlwaysShown(false);
 
-        ingredientTextShow = recipeName + "\n\n";
+        btnCount = 0;
+
         for (Recipe recipe : cookBook) {
             if (recipe.getName().equals(recipeName)) {
                 for (Ingredient ingredient : recipe.getIngredients()) {
-                    ingredientTextShow += decFormat.format(ingredient.getAmount()) + " "
-                                        + ingredient.getAbbreviation(ingredient.getUnit()) + " "
-                                        + ingredient.getName()
-                                        + "\n";
+                    String ingredientText = decFormat.format(ingredient.getAmount()) + " "
+                                            + ingredient.getAbbreviation(ingredient.getUnit()) + " "
+                                            + ingredient.getName();
+
+                    btnCount += 1;
+                    Button btnNew = new Button(getApplicationContext());
+                    btnNew.setId(btnCount);
+                    btnNew.setBackgroundColor(Color.parseColor(Colors.STANDARD_GREY.getDisplayText()));
+                    btnNew.setTextColor(Color.WHITE);
+                    btnNew.setAllCaps(false);
+                    btnNew.setLayoutParams(layoutParams);
+                    btnNew.setGravity(Gravity.CENTER_VERTICAL);
+                    btnNew.setTextSize(21);
+                    btnNew.setPadding(10,3,10,3);
+                    btnNew.setText(ingredientText);
+                    layout.addView(btnNew);
+
+                    btnNew.setOnClickListener(new View.OnClickListener() {
+                        long startTime;
+                        @Override
+                        public void onClick(View v) {
+                            if (ingredient.getEditModeOn()) {                                           // Wenn editmode der Ingredient an
+                                if (System.currentTimeMillis() - startTime < 2000) {                    // falls button vor weniger als 2 sekunden gedrückt
+                                    recipe.removeIngredient(ingredient);
+                                    saveData(cookBook);
+                                    loadData();
+                                    et_ingredient_name.setText("");
+                                    setIngredients();
+                                } else {                                                                // falls button vor weniger als 2 sekunden gewählt
+                                    ingredient.setEditModeOn(false);
+                                    btnNew.setBackgroundColor(Color.parseColor(Colors.STANDARD_GREY.getDisplayText()));
+                                    et_ingredient_name.setText("");
+                                    startTime = 0;
+                                }
+                            } else {                                                                    // Wenn editmode der Ingredient aus
+                                startTime = System.currentTimeMillis();
+                                ingredient.setEditModeOn(true);
+                                btnNew.setBackgroundColor(Color.parseColor(Colors.STANDARD_RED.getDisplayText()));
+                                et_ingredient_name.setText(ingredient.getName());
+                            }
+                        }
+                    });
                 }
+                break;
             }
         }
-        tv_show_ingredients.setText(ingredientTextShow);
+
     }
 
     @Override

@@ -70,6 +70,13 @@ public class MainActivity extends AppCompatActivity implements Savior {
                     return;
                 }
 
+                // falls recipe name schon vorhanden ist
+                if (recipeNameTaken(recipeName)) {
+                    Toast.makeText(MainActivity.this, "There's already a recipe called \"" + recipeName + "\". Please delete it or choose another name.", Toast.LENGTH_LONG).show();
+                    return;
+
+                }
+
                 // create and save Recipe
                 Recipe recipe = new Recipe(recipeName);
                 cookBook.add(recipe);
@@ -94,24 +101,21 @@ public class MainActivity extends AppCompatActivity implements Savior {
         layout.removeAllViews();
 
         if (deleteMode) {
-            buttonColor = "#FA4343";
+            buttonColor = Colors.BG_BLACK.getDisplayText();
         } else {
-            buttonColor = "#636C6A6A";
+            buttonColor = Colors.STANDARD_RED.getDisplayText();
         }
 
         cookBook = loadData();
         saveData(cookBook);
 
         for (Recipe recipe : cookBook){
-//            if (recipe.getName().equals("")) {
-//                return;
-//            }
-
             btnCount += 1;
             Button btnNew = new Button(getApplicationContext());
             btnNew.setId(btnCount);
             btnNew.setBackgroundColor(Color.parseColor(buttonColor));
             btnNew.setTextColor(Color.WHITE);
+            btnNew.setAllCaps(false);
             btnNew.setLayoutParams(layoutParams);
             btnNew.setGravity(Gravity.CENTER_VERTICAL);
             btnNew.setTextSize(21);
@@ -147,7 +151,15 @@ public class MainActivity extends AppCompatActivity implements Savior {
         }
     }
 
-
+    private boolean recipeNameTaken(String recipeNameContestant) {
+        cookBook = loadData();
+        for (Recipe recipe : cookBook) {
+            if (recipe.getName().equals(recipeNameContestant)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 

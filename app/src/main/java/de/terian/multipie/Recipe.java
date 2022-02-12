@@ -30,9 +30,9 @@ public class Recipe {
     public void addIngredient(Ingredient ingredient){
         this.ingredients.add(ingredient);
     }
-    public void removeIngredient(String name){
+    public void removeIngredient(Ingredient ingredientDel){
         for (Ingredient ingredient : ingredients) {
-            if (ingredient.getName().equals(name)){
+            if (ingredient.getName().equals(ingredientDel.getName())){
                 this.ingredients.remove(ingredient);
                 break;
             }
@@ -40,7 +40,7 @@ public class Recipe {
     }
     public void printRecipe() {
         for (Ingredient i : ingredients) {
-            System.out.println(i.getName() + ", " + i.getAmount() + " " + i.getUnit().getDisplayText());
+            System.out.println(i.getName() + " " + i.getAmount() + " " + i.getUnit().getDisplayText());
         }
     }
 }

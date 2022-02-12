@@ -55,6 +55,7 @@ public class Ingredient {
     private String name;
     private double amount;
     private Unit unit;
+    private boolean editModeOn = false;
 
     Ingredient(String name) {
         this.name = name;
@@ -77,6 +78,9 @@ public class Ingredient {
         }
         return null;
     }
+    public boolean getEditModeOn () {
+        return editModeOn;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -85,6 +89,9 @@ public class Ingredient {
     }
     public void setUnit(Unit unit) {
         this.unit = unit;
+    }
+    public void setEditModeOn (Boolean bool) {
+        editModeOn = bool;
     }
 }
 

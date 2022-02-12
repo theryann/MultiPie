@@ -26,7 +26,17 @@
             android:textColor="#E3E1E1"
             android:textSize="35sp" />
 
+        <TextView
+            android:id="@+id/tv_add_ingredients_recipe_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:text="Add Ingredients"
+            android:textColor="#E3E1E1"
+            android:textSize="25sp" />
+
         <ScrollView
+            android:id="@+id/scroll_add_ingredients"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -34,19 +44,10 @@
             android:scrollbars="vertical">
 
             <LinearLayout
+                android:id="@+id/vl_add_ingredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_show_ingredients"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#636C6A6A"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="20dp"
-                    android:text="TextView"
-                    android:textSize="20sp" />
 
                 <Space
                     android:layout_width="match_parent"
