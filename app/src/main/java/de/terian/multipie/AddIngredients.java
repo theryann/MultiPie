@@ -68,24 +68,38 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                 Double amount = Double.parseDouble(en_ingredient_amount.getText().toString());
                 Ingredient.Unit unit = Ingredient.Unit.getUnitFromString(currentSelectedUnit);
 
+                // add ingredient
                 for (Recipe recipe : cookBook) {
                     if (recipe.getName().equals(recipeName)) {
+                        // ingredient schon vorhanden? -> updaten
+                        for (Ingredient ingredient : recipe.getIngredients()) {
+                            if (ingredient.getName().equals(name)) {
+                                ingredient.setAmount(amount);
+                                ingredient.setUnit(unit);
+                                System.out.println(name + " schoj da ");
+
+                                saveData(cookBook);
+                                cookBook = loadData();
+                                setIngredients();
+                                en_ingredient_amount.setText("");
+                                et_ingredient_name.setText("");
+                                break;
+                            }
+                        }
+                        // keine ingredient mit dem namen gefunden -> neue ingredient
                         Ingredient newIngredient = new Ingredient(name);
                         newIngredient.setAmount(amount);
                         newIngredient.setUnit(unit);
                         recipe.addIngredient(newIngredient);
+
+                        saveData(cookBook);
+                        cookBook = loadData();
+                        setIngredients();
+                        en_ingredient_amount.setText("");
+                        et_ingredient_name.setText("");
                         break;
                     }
                 }
-
-                saveData(cookBook);
-                cookBook = loadData();
-
-                setIngredients();
-                en_ingredient_amount.setText("");
-                et_ingredient_name.setText("");
-
-
             }
         });
 
@@ -98,7 +112,6 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
         tv_add_ingredients_recipe_name.setText(recipeName);
         setIngredients();
     }
-
 
 
     private void setIngredients () {
@@ -118,7 +131,6 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                     String ingredientText = decFormat.format(ingredient.getAmount()) + " "
                                             + ingredient.getAbbreviation(ingredient.getUnit()) + " "
                                             + ingredient.getName();
-
                     btnCount += 1;
                     Button btnNew = new Button(getApplicationContext());
                     btnNew.setId(btnCount);
