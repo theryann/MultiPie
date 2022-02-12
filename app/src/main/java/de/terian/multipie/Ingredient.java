@@ -1,6 +1,8 @@
 package de.terian.multipie;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Ingredient {
 
@@ -51,6 +53,8 @@ public class Ingredient {
             {"Tasse", "Tas."},
             {"Packung", "Pkg."}
     };
+
+
 
     private String name;
     private double amount;

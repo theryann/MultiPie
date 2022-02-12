@@ -78,7 +78,6 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                                 if (ingredient.getEditModeOn()) {
                                     ingredient.setAmount(amount);
                                     ingredient.setUnit(unit);
-                                    System.out.println(name + " schoj da ");
 
                                     saveData(cookBook);
                                     cookBook = loadData();
@@ -90,7 +89,7 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                                     Toast.makeText(AddIngredients.this, "There's already an ingredient called \""
                                                                                     + ingredient.getName()
                                                                                     + "\". Please delete it, select it to update it or choose another name.", Toast.LENGTH_LONG).show();
-                                    break;
+                                    return;
                                 }
                             }
                         }
@@ -149,7 +148,7 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                     btnNew.setGravity(Gravity.CENTER_VERTICAL);
                     btnNew.setTextSize(21);
                     btnNew.setPadding(10,3,10,3);
-                    btnNew.setText(ingredientText);
+                    btnNew.setText(ingredientText + " " +getEmoji(ingredient.getName()));
                     layout.addView(btnNew);
 
                     btnNew.setOnClickListener(new View.OnClickListener() {
