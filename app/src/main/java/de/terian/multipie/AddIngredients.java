@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -74,16 +75,23 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                         // ingredient schon vorhanden? -> updaten
                         for (Ingredient ingredient : recipe.getIngredients()) {
                             if (ingredient.getName().equals(name)) {
-                                ingredient.setAmount(amount);
-                                ingredient.setUnit(unit);
-                                System.out.println(name + " schoj da ");
+                                if (ingredient.getEditModeOn()) {
+                                    ingredient.setAmount(amount);
+                                    ingredient.setUnit(unit);
+                                    System.out.println(name + " schoj da ");
 
-                                saveData(cookBook);
-                                cookBook = loadData();
-                                setIngredients();
-                                en_ingredient_amount.setText("");
-                                et_ingredient_name.setText("");
-                                break;
+                                    saveData(cookBook);
+                                    cookBook = loadData();
+                                    setIngredients();
+                                    en_ingredient_amount.setText("");
+                                    et_ingredient_name.setText("");
+                                    break;
+                                } else {
+                                    Toast.makeText(AddIngredients.this, "There's already an ingredient called \""
+                                                                                    + ingredient.getName()
+                                                                                    + "\". Please delete it, select it to update it or choose another name.", Toast.LENGTH_LONG).show();
+                                    break;
+                                }
                             }
                         }
                         // keine ingredient mit dem namen gefunden -> neue ingredient
