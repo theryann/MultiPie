@@ -83,24 +83,22 @@ public interface Savior {
             {"Brokkoli", "🥦"},
             {"Brot", "🍞"},
             {"Burrito", "🌯"},
-            {"Cocktail Glas", "🍸"},
+            {"Cocktail", "🍸"},
             {"Croissant", "🥐"},
             {"Cupcake", "🧁"},
             {"Curryreis", "🍛"},
             {"Dango", "🍡"},
             {"Dosen Essen", "🥫"},
-            {"Ein Glas Milch", "🥛"},
+            {"Milch", "🥛"},
             {"Eis", "🍨"},
             {"Erdbeere", "🍓"},
             {"Erdnüsse", "🥜"},
-            {"Fischfrikadelle mit Strudel", "🍥"},
+            {"Strudel", "🍥"},
             {"Knochen", "🍖"},
             {"Fleisch", "🥩"},
-            {"Gabel und Messer", "🍴"},
-            {"Gabel und Messer mit Teller", "🍽"},
             {"Garnelen", "🍤"},
             {"kuchen", "🎂"},
-            {"Geflügelkeule", "🍗"},
+            {"keule", "🍗"},
             {"Fladenbrot", "🥙"},
             {"Reis", "🍚"},
             {"Eis", "🍧"},
@@ -115,18 +113,17 @@ public interface Savior {
             {"Karotte", "🥕"},
             {"Möhre", "🥕"},
             {"Kartoffel", "🥔"},
-            {"Käse Keil", "🧀"},
+            {"Käse", "🧀"},
             {"Kastanie", "🌰"},
             {"Kirschen", "🍒"},
             {"Kiwi", "🥝"},
-            {"klirrende Bierkrüge", "🍻"},
-            {"klirrende Gläser", "🥂"},
+            {"Bierkrüge", "🍻"},
+            {"Gläser", "🥂"},
             {"Kochen", "🍳"},
             {"Kokosnuss", "🥥"},
             {"Kornähre", "🌽"},
             {"Krapfen", "🍩"},
             {"Kuchen", "🥧"},
-            {"Löffel", "🥄"},
             {"Mandarine", "🍊"},
             {"Mango", "🥭"},
             {"Melone", "🍈"},
@@ -149,6 +146,12 @@ public interface Savior {
             {"Schüssel mit Löffel", "🥣"},
             {"Shortcake", "🍰"},
             {"Eis", "🍦"},
+            {"Ei", "🥚"},
+            {"Butter", "🧈"},
+            {"Salat", "🥗"},
+            {"Honig", "🍯"},
+            {"Saft", "🧃"},
+            {"Wasser", "💧"},
             {"Spaghetti", "🍝"},
             {"Nudeln", "🍝"},
             {"Speck", "🥓"},
@@ -156,7 +159,7 @@ public interface Savior {
             {"Süßigkeiten", "🍬"},
             {"Taco", "🌮"},
             {"Tafel Schokolade", "🍫"},
-            {"Teetasse ohne Henkel", "🍵"},
+            {"Tee", "🍵"},
             {"Tomate", "🍅"},
             {"Topf mit Essen", "🍲"},
             {"Trauben", "🍇"},
@@ -164,12 +167,18 @@ public interface Savior {
             {"Vanillesoße", "🍮"},
             {"Wassermelone", "🍉"},
             {"Weinglas", "🍷"},
+            {"Öl", "🌻"},
+            {"Sonnenblumenöl", "🌻"},
             {"Zitrone", "🍋"}
     };
 
     default String getEmoji(String word) {
         for (String[] pair : pics) {
-            if (pair[0].toLowerCase().contains(word.toLowerCase()) || (pair[0] + "n").toLowerCase().contains(word.toLowerCase()) || (pair[0] + "en").toLowerCase().contains(word.toLowerCase()) ) {
+            if (pair[0].length() == 1) { return ""; }
+            if (pair[0].toLowerCase().contains(word.toLowerCase())
+                    || (pair[0] + "n").toLowerCase().contains(word.toLowerCase())
+                    || (pair[0] + "en").toLowerCase().contains(word.toLowerCase())
+                    || (pair[0] + "er").toLowerCase().contains(word.toLowerCase()) ) {
                 return pair[1];
             }
         }
