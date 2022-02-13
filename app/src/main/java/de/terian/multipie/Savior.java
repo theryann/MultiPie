@@ -173,8 +173,8 @@ public interface Savior {
     };
 
     default String getEmoji(String word) {
+        if (word.length() == 1) { return ""; }
         for (String[] pair : pics) {
-            if (pair[0].length() == 1) { return ""; }
             if (pair[0].toLowerCase().contains(word.toLowerCase())
                     || (pair[0] + "n").toLowerCase().contains(word.toLowerCase())
                     || (pair[0] + "en").toLowerCase().contains(word.toLowerCase())

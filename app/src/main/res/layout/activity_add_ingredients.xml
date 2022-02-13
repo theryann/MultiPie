@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="horizontal|none"
     tools:context=".AddIngredients">
 
     <LinearLayout
@@ -26,14 +27,64 @@
             android:textColor="#E3E1E1"
             android:textSize="35sp" />
 
-        <TextView
-            android:id="@+id/tv_add_ingredients_recipe_name"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:text="Add Ingredients"
-            android:textColor="#E3E1E1"
-            android:textSize="25sp" />
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_add_ingredients_recipe_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:isScrollContainer="true"
+                            android:paddingBottom="20dp"
+                            android:text="Recipe"
+                            android:textColor="#E3E1E1"
+                            android:textSize="25sp" />
+                    </LinearLayout>
+                </ScrollView>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_personen_anzahl2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="for" />
+
+                <EditText
+                    android:id="@+id/et_person_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:gravity="center_horizontal"
+                    android:inputType="number"
+                    android:text="2" />
+
+                <TextView
+                    android:id="@+id/tv_personen_anzahl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="persons" />
+            </TableRow>
+
+        </TableLayout>
 
         <ScrollView
             android:id="@+id/scroll_add_ingredients"
