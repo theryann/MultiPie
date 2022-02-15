@@ -79,6 +79,7 @@ public interface Savior {
             {"Bierkrug", "🍺"},
             {"Birne", "🍐"},
             {"Blattgrün", "🥬"},
+            {"Blattgemüse", "🥬"},
             {"Brezel", "🥨"},
             {"Brokkoli", "🥦"},
             {"Brot", "🍞"},
@@ -93,6 +94,7 @@ public interface Savior {
             {"Eis", "🍨"},
             {"Erdbeere", "🍓"},
             {"Erdnüsse", "🥜"},
+            {"Erdnuss", "🥜"},
             {"Strudel", "🍥"},
             {"Knochen", "🍖"},
             {"Fleisch", "🥩"},
@@ -107,8 +109,11 @@ public interface Savior {
             {"Apfel", "🍏"},
             {"Salat", "🥗"},
             {"Gurke", "🥒"},
+            {"Mais", "🌽"},
+            {"Maiskolben", "🌽"},
             {"Hamburger", "🍔"},
             {"Honigtopf", "🍯"},
+            {"Honigmelone", "🍈"},
             {"Hotdog", "🌭"},
             {"Karotte", "🥕"},
             {"Möhre", "🥕"},
@@ -158,27 +163,31 @@ public interface Savior {
             {"Sushi", "🍣"},
             {"Süßigkeiten", "🍬"},
             {"Taco", "🌮"},
+            {"Olive","🫒"},
+            {"Olivenöl","🫒"},
+            {"Schokolade", "🍫"},
             {"Tafel Schokolade", "🍫"},
             {"Tee", "🍵"},
             {"Tomate", "🍅"},
-            {"Topf mit Essen", "🍲"},
             {"Trauben", "🍇"},
+            {"Weintrauben", "🍇"},
             {"tropisches Getränk", "🍹"},
             {"Vanillesoße", "🍮"},
             {"Wassermelone", "🍉"},
             {"Weinglas", "🍷"},
             {"Öl", "🌻"},
             {"Sonnenblumenöl", "🌻"},
+            {"Zwiebel", "🧅"},
             {"Zitrone", "🍋"}
     };
 
     default String getEmoji(String word) {
         if (word.length() == 1) { return ""; }
         for (String[] pair : pics) {
-            if (pair[0].toLowerCase().contains(word.toLowerCase())
-                    || (pair[0] + "n").toLowerCase().contains(word.toLowerCase())
-                    || (pair[0] + "en").toLowerCase().contains(word.toLowerCase())
-                    || (pair[0] + "er").toLowerCase().contains(word.toLowerCase()) ) {
+            if (        pair[0].toLowerCase().equals(word.toLowerCase())
+                    || (pair[0] + "n").toLowerCase().equals(word.toLowerCase())
+                    || (pair[0] + "en").toLowerCase().equals(word.toLowerCase())
+                    || (pair[0] + "er").toLowerCase().equals(word.toLowerCase()) ) {
                 return pair[1];
             }
         }

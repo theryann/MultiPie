@@ -51,6 +51,7 @@
                             android:layout_height="wrap_content"
                             android:isScrollContainer="true"
                             android:paddingBottom="20dp"
+                            android:scrollbars="none"
                             android:text="Recipe"
                             android:textColor="#E3E1E1"
                             android:textSize="25sp" />

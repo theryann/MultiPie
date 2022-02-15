@@ -33,12 +33,12 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
     private ArrayList<Recipe> cookBook = new ArrayList<>();
     private String recipeName;
     private String currentSelectedUnit;
-    private String ingredientTextShow;
     private int btnCount;
     TextView tv_add_ingredients_recipe_name;
     ImageView iv_add_ingredient;
     EditText et_ingredient_name;
     EditText en_ingredient_amount;
+    EditText et_person_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
         tv_add_ingredients_recipe_name = findViewById(R.id.tv_add_ingredients_recipe_name);
         et_ingredient_name = findViewById(R.id.et_ingredient_name);
         en_ingredient_amount = findViewById(R.id.en_ingredient_amount);
+        et_person_count = findViewById(R.id.et_person_count);
 
         iv_add_ingredient = findViewById(R.id.iv_add_ingredient);
         iv_add_ingredient.setOnClickListener(new View.OnClickListener() {
@@ -64,20 +65,28 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                     return;
                 }
 
+                // abbruch falls keine personen zahl gegeben ist
+                if (et_person_count.getText().toString().length() == 0) {
+                    Toast.makeText(AddIngredients.this, "Please first specify for how many persons this recipe is planned.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 // get values
                 String name = et_ingredient_name.getText().toString();
                 Double amount = Double.parseDouble(en_ingredient_amount.getText().toString());
                 Ingredient.Unit unit = Ingredient.Unit.getUnitFromString(currentSelectedUnit);
+                int personCount = Integer.parseInt(en_ingredient_amount.getText().toString());
 
                 // add ingredient
                 for (Recipe recipe : cookBook) {
                     if (recipe.getName().equals(recipeName)) {
-                        // ingredient schon vorhanden? -> updaten
+                        // ingredient schon vorhanden? -> UPDATE
                         for (Ingredient ingredient : recipe.getIngredients()) {
                             if (ingredient.getName().equals(name)) {
                                 if (ingredient.getEditModeOn()) {
                                     ingredient.setAmount(amount);
                                     ingredient.setUnit(unit);
+                                    recipe.setPersonAmount(personCount); // person count, falls sich geändert hat
 
                                     saveData(cookBook);
                                     cookBook = loadData();
@@ -93,11 +102,13 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                                 }
                             }
                         }
-                        // keine ingredient mit dem namen gefunden -> neue ingredient
+                        // keine ingredient mit dem namen gefunden -> NEUE ingredient
                         Ingredient newIngredient = new Ingredient(name);
                         newIngredient.setAmount(amount);
                         newIngredient.setUnit(unit);
+
                         recipe.addIngredient(newIngredient);
+                        recipe.setPersonAmount(personCount);
 
                         saveData(cookBook);
                         cookBook = loadData();

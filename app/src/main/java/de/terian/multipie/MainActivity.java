@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements Savior {
         });
         deleteMode = !switch_delete_mode.isChecked();
 
-
         updateList();
 
         tvScaleIngredients = findViewById(R.id.tv_add_ingredients);
