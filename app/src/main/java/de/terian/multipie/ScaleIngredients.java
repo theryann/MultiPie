@@ -1,5 +1,6 @@
 package de.terian.multipie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,13 +19,16 @@ import java.util.ArrayList;
 public class ScaleIngredients extends AppCompatActivity implements Savior, OnMenuItemClickListener {
 
     private ArrayList<Recipe> cookBook = new ArrayList<>();
+    private String recipeName;
     ImageView iv_settings;
+    TextView tv_scale_recipe_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_scale_ingredients);
+
+        tv_scale_recipe_name = findViewById(R.id.tv_scale_recipe_name);
 
         iv_settings = findViewById(R.id.iv_settings);
         iv_settings.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +65,9 @@ public class ScaleIngredients extends AppCompatActivity implements Savior, OnMen
         });
 
         cookBook = loadData();
-
+        Intent intent = getIntent();
+        recipeName = intent.getStringExtra(MainActivity.EXTRA_TEXT);
+        tv_scale_recipe_name.setText(recipeName);
     }
 
 
