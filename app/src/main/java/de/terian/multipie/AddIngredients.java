@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -55,6 +57,22 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
         et_ingredient_name = findViewById(R.id.et_ingredient_name);
         en_ingredient_amount = findViewById(R.id.en_ingredient_amount);
         et_person_count = findViewById(R.id.et_person_count);
+        et_person_count.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                for (Recipe recipe : cookBook) {
+                    if (recipe.getName().equals(recipeName)) {
+                        recipe.setPersonAmount(Integer.parseInt(et_person_count.getText().toString()));
+                        saveData(cookBook);
+                    }
+                    break;
+                }
+            }
+        });
 
         iv_add_ingredient = findViewById(R.id.iv_add_ingredient);
         iv_add_ingredient.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +93,7 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                 String name = et_ingredient_name.getText().toString();
                 Double amount = Double.parseDouble(en_ingredient_amount.getText().toString());
                 Ingredient.Unit unit = Ingredient.Unit.getUnitFromString(currentSelectedUnit);
-                int personCount = Integer.parseInt(en_ingredient_amount.getText().toString());
+                int personCount = Integer.parseInt(et_person_count.getText().toString());
 
                 // add ingredient
                 for (Recipe recipe : cookBook) {

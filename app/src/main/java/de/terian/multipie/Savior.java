@@ -37,7 +37,18 @@ public interface Savior {
         public String getDisplayText() {
             return colorText;
         }
+    }
+    enum Languages {
+        DE_PERSONS("Personen"),
+        EN_PERSONS("persons");
 
+        private String text;
+        private Languages(String text) {
+            this.text = text;
+        }
+        public String getString() {
+            return text;
+        }
     }
 
     default void saveData(ArrayList<Recipe> cookBook) {

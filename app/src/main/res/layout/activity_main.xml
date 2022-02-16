@@ -71,6 +71,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"
             android:ems="10"
+            android:gravity="center_horizontal"
             android:inputType="textPersonName"
             android:textColor="#EDE2E2"
             android:textColorHighlight="#E3E1E1"
