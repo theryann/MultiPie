@@ -195,10 +195,10 @@ public interface Savior {
     default String getEmoji(String word) {
         if (word.length() == 1) { return ""; }
         for (String[] pair : pics) {
-            if (        pair[0].toLowerCase().equals(word.toLowerCase())
-                    || (pair[0] + "n").toLowerCase().equals(word.toLowerCase())
-                    || (pair[0] + "en").toLowerCase().equals(word.toLowerCase())
-                    || (pair[0] + "er").toLowerCase().equals(word.toLowerCase()) ) {
+            if (        pair[0].equalsIgnoreCase(word)
+                    || (pair[0] + "n").equalsIgnoreCase(word)
+                    || (pair[0] + "en").equalsIgnoreCase(word)
+                    || (pair[0] + "er").equalsIgnoreCase(word) ) {
                 return pair[1];
             }
         }

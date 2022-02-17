@@ -208,8 +208,6 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                             } else {                                                                    // Wenn editmode der Ingredient aus
                                 startTime = System.currentTimeMillis();
                                 ingredient.setEditModeOn(true);
-
-
                                 btnNew.setBackgroundColor(Color.parseColor(Colors.STANDARD_RED.getDisplayText()));
                                 et_ingredient_name.setText(ingredient.getName());
                             }
