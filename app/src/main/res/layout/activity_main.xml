@@ -43,6 +43,11 @@
 
         </LinearLayout>
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_weight="0" />
+
         <ScrollView
             android:id="@+id/scroll_add_ingredients"
             android:layout_width="match_parent"

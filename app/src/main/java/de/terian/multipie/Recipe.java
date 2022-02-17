@@ -9,6 +9,7 @@ public class Recipe {
 
     Recipe(String name) {
         this.name = name;
+        personAmount = 2;
     }
 
 
@@ -23,6 +24,9 @@ public class Recipe {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
     public void setPersonAmount(int personAmount) {
         this.personAmount = personAmount;
@@ -42,5 +46,17 @@ public class Recipe {
         for (Ingredient i : ingredients) {
             System.out.println(i.getName() + " " + i.getAmount() + " " + i.getUnit().getDisplayText());
         }
+    }
+    public String toExportString() {
+        String export = "";
+        for (Ingredient ing : ingredients) {
+            Ingredient.Unit unit = ScaleIngredients.convertUnit(ing);
+            String quantity = ScaleIngredients.convertAmount(ing);
+
+            export += quantity + " "
+                    + ing.getAbbreviation(unit) + " "
+                    + ing.getName() + "\n";
+        }
+        return export;
     }
 }

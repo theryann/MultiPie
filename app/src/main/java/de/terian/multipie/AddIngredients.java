@@ -66,6 +66,7 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
             public void afterTextChanged(Editable s) {
                 for (Recipe recipe : cookBook) {
                     if (recipe.getName().equals(recipeName)) {
+                        if (et_person_count.getText().toString().equals("")) { return; }
                         recipe.setPersonAmount(Integer.parseInt(et_person_count.getText().toString()));
                         saveData(cookBook);
                     }
@@ -146,6 +147,13 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
         Intent intent = getIntent();
         recipeName = intent.getStringExtra(MainActivity.EXTRA_TEXT);
         tv_add_ingredients_recipe_name.setText(recipeName);
+        // get person amount
+        for (Recipe recipe : cookBook) {
+            if (recipe.getName().equals(recipeName)) {
+                et_person_count.setText(Integer.toString(recipe.getPersonAmount()));
+                break;
+            }
+        }
         setIngredients();
     }
 
@@ -200,6 +208,8 @@ public class AddIngredients extends AppCompatActivity implements Savior, Adapter
                             } else {                                                                    // Wenn editmode der Ingredient aus
                                 startTime = System.currentTimeMillis();
                                 ingredient.setEditModeOn(true);
+
+
                                 btnNew.setBackgroundColor(Color.parseColor(Colors.STANDARD_RED.getDisplayText()));
                                 et_ingredient_name.setText(ingredient.getName());
                             }

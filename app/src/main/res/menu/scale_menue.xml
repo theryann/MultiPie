@@ -12,6 +12,7 @@
 
     <item android:id="@+id/export_recipe"
         android:title="Share Recipe"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
+
 
 </menu>

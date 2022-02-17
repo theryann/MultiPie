@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="Multiply Recipes"
+                android:text="Multiply Recipe"
                 android:textColor="#E3E1E1"
                 android:textSize="30sp" />
 
@@ -73,6 +73,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#636C6A6A"
+            android:paddingTop="10dp"
             android:scrollbarStyle="insideOverlay">
 
 
@@ -83,32 +84,9 @@
                 android:orientation="vertical">
 
                 <TableLayout
+                    android:id="@+id/tl_ingredients_table"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
-
-                        <TextView
-                            android:id="@+id/textView2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </TableLayout>
+                    android:layout_height="match_parent"/>
 
                 <Space
                     android:layout_width="match_parent"
@@ -121,27 +99,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
+            <ImageButton
+                android:id="@+id/bt_scale_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_minus" />
+
             <EditText
-                android:id="@+id/et"
+                android:id="@+id/et_scale_person_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
                 android:ems="3"
-                android:inputType="textPersonName"
+                android:gravity="center_horizontal"
+                android:inputType="number"
                 android:textColor="#EDE2E2"
                 android:textColorHighlight="#E3E1E1"
                 android:textSize="24sp" />
 
             <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_minus" />
-
-            <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/bt_scale_plus"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
